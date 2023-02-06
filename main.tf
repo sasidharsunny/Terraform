@@ -2,7 +2,7 @@ provider "aws" {
    
     access_key = "AKIAXOHB53QC56ZM2VTM"
     secret_key = "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"
-    region = "us-west-1"
+    region = "us-east-2"
 }
 
 terraform {
@@ -25,7 +25,7 @@ module terraform-testvpc {
    private_cidr_block = ["10.0.10.0/24","10.0.20.0/24","10.0.30.0/24"]
    public_Routing_Table  = "public-routing-table"
    private_Routing_Table = "private-routing-table"
-   azs = ["us-west-1a","us-west-1c","us-west-1c"]
+   azs = ["us-east-2a","us-east-2b","us-east-2c"]
  }
 
 
@@ -33,14 +33,11 @@ module terraform-ec2 {
    source = "./modules/ec2"
    subnet_id = "${module.terraform-testvpc.all-subnet-public-id}"
    instance_type = "t2.micro"
-   key_name = "LaptopKey"
+  #  key_name = "LaptopKey"
    sg_id =  "${module.terraform-testvpc.sg_id}"
-   imagename = "ami-09b2a1e33ce552e68"
+   imagename = "ami-0ab0629dba5ae551d"
    maximumcount =  3
-
-
-
- }
+}
 
 
 
